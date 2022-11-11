@@ -1,30 +1,60 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3200
 const web = require('./routes/web')
+const fileUpload = require("express-fileupload");
 
-app.use(express.json())
+//Temp file uploader
+app.use(fileUpload({useTempFiles: true}));
+//Required Cloudinary
+const cloudinary = require('cloudinary');
+
+//connect flash and sessions
+const session = require('express-session')
+const flash = require('connect-flash');
+
+//messages
+app.use(session({
+    secret: 'secret',
+    cookie: { maxAge: 60000 },
+    resave: false,
+    saveUninitialized: false,
+  }));
+//Flash messages
+app.use(flash());
+
+//cookies
+const cookieParser = require('cookie-parser');
+app.use(cookieParser())
+
+
+
 //Body parser require
 const bodyParser = require('body-parser')
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended:false }))
 // parse application/json
+app.use(express.json())
 
+//Database connection
+const connectDB = require('./db/connectdb')
+connectDB()
 
-
-
-app.set('view engine','ejs')
 //routing
 app.use('/',web)
+
+
+
+// ejs setup(template)
+app.set('view engine','ejs')
 
 //static file setup
 app.use(express.static('public'))
 
 
 
-//Database connection
-const connectDB = require('./db/connectdb')
-connectDB()
+
+
 
 
 
