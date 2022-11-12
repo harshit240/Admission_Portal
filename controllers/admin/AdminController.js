@@ -64,9 +64,34 @@ class AdminController {
       console.log(error);
     }
   }
+  static viewcourse = async (req, res) => {
+    try {
+      const { name, image,email } = req.data1;
+      const data = await CourseModel.findById(req.params.id)
+      // console.log(data);
+      res.render('admin/viewcourse',{ name: name, image: image,email:email ,viewdata:data})
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
   static UpdateCourse = async (req, res) =>{
     try {
-      
+      const user = await CourseModel.findById(req.params.id)
+      // console.log(user);
+      const result = await CourseModel.findByIdAndUpdate(req.params.id,{
+        name: req.body.name,
+        email: req.body.email,
+        number:req.body.number,
+        dob:req.body.dob,
+        gender:req.body.gender,
+        address:req.body.address,
+        college:req.body.college,
+        course:req.body.course,
+        branch:req.body.branch,
+      })
+      await result.save()
+      res.redirect('admin/displaycourse')
     } catch (error) {
       console.log(error);
     }

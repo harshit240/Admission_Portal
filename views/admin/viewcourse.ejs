@@ -1,0 +1,62 @@
+<%- include('../front/header.ejs') %>
+
+    
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <th></th>
+                    <td></td>
+                    <td>Username:</td>
+                    <td><%= viewdata.name %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td></td>
+                    <td>Email:</td>
+                    <td><%= viewdata.email %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td></td>
+                    <td>Mobile No:</td>
+                    <td><%= viewdata.number %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td></td>
+                    <td>Address:</td>
+                    <td><%= viewdata.address %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td></td>
+                    <td>Gender:</td>
+                    <td><%= viewdata.gender %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td></td>
+                    <td>College:</td>
+                    <td><%= viewdata.college %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td></td>
+                    <td>Course:</td>
+                    <td><%= viewdata.course %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td></td>
+                    <td>Branch:</td>
+                    <td><%= viewdata.branch %></td>
+                </tr>
+            </tbody>
+           
+           
+        </table>
+        <div class="my-4 text-center">
+            <a href="/dashboard" class="backdash">Back To The Dashboard</a>
+        </div>
+
+    <%- include('../front/footer.ejs') %>

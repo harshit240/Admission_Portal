@@ -25,6 +25,7 @@ router.get('/course/bca',CheckUserAuth,AdminController.displaycourse)
 router.post('/register/btech',CheckUserAuth,AdminController.Register)
 router.get('/admin/editcourse/:id',CheckUserAuth,AdminController.EditCourse)
 router.post('/register/update_btech/:id',CheckUserAuth,AdminController.UpdateCourse)
+router.get('/admin/viewcourse/:id',CheckUserAuth,AdminController.viewcourse)
 
 
 
