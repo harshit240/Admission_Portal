@@ -9,7 +9,7 @@ const CheckUserAuth = async(req,res,next)=>{
         return res.redirect('/')
     }
     else{
-        const verify_token = jwt.verify(token,'himanshu123')
+        const verify_token = jwt.verify(token,process.env.JWT_SECRET_KEY)
         // console.log(verify_token);
         const data = await UserModel.findOne({_id:verify_token.userId})
         // console.log(data);

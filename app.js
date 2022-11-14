@@ -1,11 +1,15 @@
 const express = require('express')
 const app = express()
-const port = 3200
+// const port = process.env.PORT || 3200
 const web = require('./routes/web')
+const api = require('./routes/api')
 const fileUpload = require("express-fileupload");
+const dotenv = require('dotenv')
+dotenv.config({path:'.env'})
 
 //Temp file uploader
 app.use(fileUpload({useTempFiles: true}));
+
 //Required Cloudinary
 const cloudinary = require('cloudinary');
 
@@ -43,7 +47,8 @@ connectDB()
 //routing
 app.use('/',web)
 
-
+// API ROUTING
+app.use('/api',api)
 
 // ejs setup(template)
 app.set('view engine','ejs')
@@ -58,6 +63,6 @@ app.use(express.static('public'))
 
 
 
-app.listen(port, () => {
-    console.log(`Admission_portal app listening on port http://localhost:${port}`)
+app.listen(process.env.PORT, () => {
+    console.log(`Admission_portal app listening on port http://localhost:${process.env.PORT}`)
 })

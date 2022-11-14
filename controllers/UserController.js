@@ -43,7 +43,7 @@ class UserController {
                 public_id: image_upload.public_id,
                 url: image_upload.secure_url,
               },
-            });
+            })
             await result.save();
             req.flash("message", "Registration Successful! Do login!");
             return res.redirect("/");
@@ -72,10 +72,12 @@ class UserController {
             const isMatched = await bcrypt.compare(password,user.password)
             if((user.email === email) && isMatched){
               //verify token
-              const token = jwt.sign({ userId: user._id }, "himanshu123");
+              const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY,{
+                expiresIn:'1m'
+              });
               // console.log(token);
               res.cookie("token", token);
-                res.redirect('/dashboard')
+              res.redirect('/dashboard')
             }else{
                 req.flash('error','Email or password is not valid')
                 return res.redirect('/')
