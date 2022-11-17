@@ -37,8 +37,14 @@ const Courseschema = new mongoose.Schema({
         type:String,
         Required:true
     },
+    user:{
+        type:mongoose.Schema.ObjectId,
+        ref:"user",
+        Required:true
+    }
     
 },{timestamps:true})
+
 const CourseModel = mongoose.model('Registered_courses',Courseschema)
 
 module.exports = CourseModel

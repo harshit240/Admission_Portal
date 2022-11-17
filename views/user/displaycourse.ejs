@@ -1,0 +1,38 @@
+<%- include('../front/header.ejs') %>
+
+    <div class="container viewcourse">
+        <div class="dash-title">
+            <h1 class="text-center py-4" style="background-color:#9ad8ea; color: #fff;">Display</h1>
+        </div>
+        <table class="table table-bordered table-striped">
+            <tr style="background-color: #35b9dd; color: #fff;" class="trb thead text-center">
+                <th>S. No.</th>
+                <th>Name</th>
+                <th>College</th>
+                <th>Course</th>
+                <th>Branch</th>
+                <th>Action</th>
+            </tr>
+            <% var i = 1 %>
+            <% data.forEach((item)=>{ %>
+            <tr class="text-center trb table" style="text-transform:uppercase;">
+                <td><%= i++ %></td>
+                <td><%= item.name %></td>        
+                <td><%= item.college %></td>
+                <td><%= item.course %></td>
+                <td><%= item.branch %></td>
+                <td>
+                    <a href="/viewcourse/<%= item._id %>" class="btn btn-danger btn-sm action-btn"><i class="fa-solid fa-eye"></i></a>
+                    <a href="/editcourse/<%= item._id %>" class="btn btn-info btn-sm action-btn"><i class="fa-regular fa-pen-to-square"></i></a>
+                </td>
+            </tr>
+            <% }) %>
+           
+           
+        </table>
+        <div class="my-4 text-center">
+            <a href="/dashboard" class="backdash">Back To The Dashboard</a>
+        </div>
+    </div>
+
+    <%- include('../front/footer.ejs') %>

@@ -26,7 +26,6 @@ class UserController {
       if (name && email && password && confirm_password) {
         if (password == confirm_password) {
           try {
-            // console.log("I m in saving part");
             const imagefile = req.files.profile_image
         // console.log(imagefile);
         const image_upload = await cloudinary.uploader.upload(imagefile.tempFilePath,{
@@ -71,13 +70,25 @@ class UserController {
         if(user != null){
             const isMatched = await bcrypt.compare(password,user.password)
             if((user.email === email) && isMatched){
-              //verify token
+              if (user.role == 'user') {
+                //verify token
               const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY,{
-                expiresIn:'1m'
+                expiresIn:'20m'
               });
               // console.log(token);
               res.cookie("token", token);
               res.redirect('/dashboard')
+              }
+              
+              if (user.role == 'admin') {
+                //verify token
+              const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY,{
+                expiresIn:'20m'
+              })
+              // console.log(token);
+              res.cookie("token", token);
+              res.redirect('/admin/dashboard')
+              }
             }else{
                 req.flash('error','Email or password is not valid')
                 return res.redirect('/')

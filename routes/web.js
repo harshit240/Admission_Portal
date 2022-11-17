@@ -1,6 +1,6 @@
 const express = require('express');
 const AdminController = require('../controllers/admin/AdminController');
-const CourseController = require('../controllers/admin/AdminController');
+const CourseController = require('../controllers/CourseController');
 const FrontEndController = require('../controllers/FrontEndController');
 const UserController = require('../controllers/UserController');
 const CheckUserAuth = require('../middleware/auth');
@@ -9,7 +9,7 @@ const router = express.Router();
 
 //FrontEndController
 router.get('/',FrontEndController.login)
-router.get('/dashboard',CheckUserAuth,AdminController.dashboard)
+router.get('/dashboard',CheckUserAuth,CourseController.dashboard)
 router.get('/register',FrontEndController.register)
 
 //UserController
@@ -18,16 +18,24 @@ router.post('/user/login',UserController.verify_login)
 router.get('/logout',UserController.logout)
 
 //CourseController
-router.get('/course/btech',CheckUserAuth,AdminController.registercourse)
-router.get('/course/mtech',CheckUserAuth,AdminController.registercourse)
-router.get('/course/mba',CheckUserAuth,AdminController.registercourse)
-router.get('/course/bca',CheckUserAuth,AdminController.displaycourse)
-router.post('/register/btech',CheckUserAuth,AdminController.Register)
-router.get('/admin/editcourse/:id',CheckUserAuth,AdminController.EditCourse)
-router.post('/register/update_btech/:id',CheckUserAuth,AdminController.UpdateCourse)
-router.get('/admin/viewcourse/:id',CheckUserAuth,AdminController.viewcourse)
-router.get('/course/bca/:id',CheckUserAuth,AdminController.displaycourse)
+router.get('/course/btech',CheckUserAuth,CourseController.course_form)
+router.get('/course/bca',CheckUserAuth,CourseController.course_form2)
+router.get('/course/mca',CheckUserAuth,CourseController.course_form3)
 
+router.post('/register/btech',CheckUserAuth,CourseController.Register)
+router.post('/register/bca',CheckUserAuth,CourseController.Register)
+router.post('/register/mca',CheckUserAuth,CourseController.Register)
+
+// router.get('/course/bca/:id',CheckUserAuth,CourseController.displaycourse)
+router.get('/viewcourse/:id',CheckUserAuth,CourseController.viewcourse)
+router.get('/editcourse/:id',CheckUserAuth,CourseController.EditCourse)
+router.post('/register/update/:id',CheckUserAuth,CourseController.UpdateCourse)
+
+router.get('/course/courseview',CheckUserAuth,CourseController.displaycourse)
+
+
+//Admin Page routing
+router.get('/admin/dashboard',CheckUserAuth,AdminController.dashboard)
 
 
 

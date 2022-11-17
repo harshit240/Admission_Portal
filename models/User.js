@@ -13,6 +13,10 @@ const Userschema = new mongoose.Schema({
         type:String,
         Required:true
     },
+    role:{
+        type:String,
+        default:'user'
+    },
     image: {
         public_id: {
           type: String,
