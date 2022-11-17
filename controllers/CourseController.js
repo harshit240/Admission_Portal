@@ -19,11 +19,12 @@ class CourseController {
 
   static course_form = async (req, res) => {
     try {
-      const { name, email, image } = req.data1;
+      const { name, email, image,_id } = req.data1;
       res.render("user/course_form", {
         name: name,
         email: email,
         image: image,
+        id:_id
       });
     } catch (err) {
       console.log(err);
@@ -71,6 +72,7 @@ class CourseController {
     const { name, email, number,dob,gender,address,college,course,branch } = req.body;
     try {
       const result = await CourseModel({
+        // user_id:user_id,
         name: name,
         email: email,
         number:number,
