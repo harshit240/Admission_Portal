@@ -15,7 +15,7 @@ class CourseController {
     } catch (err) {
       console.log(err);
     }
-  };
+  }
 
   static course_form = async (req, res) => {
     try {
