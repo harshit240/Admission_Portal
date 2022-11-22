@@ -9,8 +9,10 @@ const router = express.Router();
 
 //FrontEndController
 router.get('/',FrontEndController.login)
-router.get('/dashboard',CheckUserAuth,CourseController.dashboard)
 router.get('/register',FrontEndController.register)
+router.get('/about',CheckUserAuth,FrontEndController.about)
+router.get('/contact',CheckUserAuth,FrontEndController.contact)
+router.get('/dashboard',CheckUserAuth,CourseController.dashboard)
 
 //UserController
 router.post('/user/register',UserController.register)
