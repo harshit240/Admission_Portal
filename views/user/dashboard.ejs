@@ -40,10 +40,13 @@
     <!-- ================================================================ -->
 
     <div class="container mb-5 text-center">
-        <h1 class="course_heading mt-5">Hello <%= name %></h1>
+        <h1 class="course_heading mt-5">Hello <%= name %>
+        </h1>
         <h2 class="course_heading my-3">Register Your Course</h2>
-        <p class="course_para text-center mb-5">Course Registration means the official recording of a student's name to study a course or courses.</p>
+        <p class="course_para text-center mb-5">Course Registration means the official recording of a student's name to
+            study a course or courses.</p>
         <div class="row">
+
             <div class="col-md-4 mb-5">
                 <div class="card card1">
                     <img class="card-img-top" height="200px" width="300px" src="/assets/images/card_image1.jpg"
@@ -54,26 +57,28 @@
                         <% if(b) { %>
                             <a href="/course/courseview" class="btn cors">Display</a>
                             <% }else{ %>
-                            <a href="/course/btech" class="btn cors">Register</a>
-                        <% }%>
+                                <a href="/course/btech" class="btn cors">Register</a>
+                                <% }%>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4 mb-4">
                 <div class="card card2">
-                    <img class="card-img-top " height="200px!important" width="300px!important" src="/assets/images/card_image2.jpg"
-                        alt="Card image cap">
+                    <img class="card-img-top " height="200px!important" width="300px!important"
+                        src="/assets/images/card_image2.jpg" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title ">BCA</h5>
                         <p class="card-text">BCA is a three-year Bachelor's Degree in Computer Application </p>
                         <% if(bc) { %>
                             <a href="/course/courseview" class="btn cors">Display</a>
                             <% }else{ %>
-                            <a href="/course/bca" class="btn cors">Register</a>
-                        <% }%> 
+                                <a href="/course/bca" class="btn cors">Register</a>
+                                <% }%>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4 mb-4">
                 <div class="card card3">
                     <img class="card-img-top " height="200px" width="300px" src="/assets/images/card_image3.jpg"
@@ -84,11 +89,12 @@
                         <% if(m) { %>
                             <a href="/course/courseview" class="btn cors">Display</a>
                             <% }else{ %>
-                            <a href="/course/mca" class="btn cors">Register</a>
-                        <% }%>                
+                                <a href="/course/mca" class="btn cors">Register</a>
+                                <% }%>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 

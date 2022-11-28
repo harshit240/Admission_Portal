@@ -40,7 +40,7 @@ app.use(bodyParser.urlencoded({ extended:false }))
 // parse application/json
 app.use(express.json())
 
-//Database connection
+  //Database connection
 const connectDB = require('./db/connectdb')
 connectDB()
 
