@@ -18,19 +18,21 @@ const cloudinary = require('cloudinary');
 const session = require('connect-session')
 const flash = require('connect-flash');
 
+//cookies
+const cookieParser = require('cookie-parser');
+app.use(cookieParser())
+app.use(cors())
+
 //messages
 app.use(session({
     secret: 'secret',
     cookie: { maxAge: 60000 },
     resave: false,
+    
     saveUninitialized: false,
   }));
 //Flash messages
 app.use(flash());
-
-//cookies
-const cookieParser = require('cookie-parser');
-app.use(cookieParser())
 
 
 
