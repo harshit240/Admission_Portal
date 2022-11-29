@@ -4,6 +4,7 @@ const CourseController = require('../controllers/CourseController');
 const FrontEndController = require('../controllers/FrontEndController');
 const UserController = require('../controllers/UserController');
 const CheckUserAuth = require('../middleware/auth');
+const AuthRole = require('../middleware/authrole');
 const router = express.Router();
 
 
@@ -37,7 +38,7 @@ router.get('/course/courseview',CheckUserAuth,CourseController.displaycourse)
 
 
 //Admin Page routing
-router.get('/admin/dashboard',CheckUserAuth,AdminController.dashboard)
+router.get('/admin/dashboard',CheckUserAuth,AuthRole('admin'),AdminController.dashboard)
 
 
 

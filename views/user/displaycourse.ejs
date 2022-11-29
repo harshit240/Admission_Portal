@@ -11,6 +11,7 @@
                 <th>College</th>
                 <th>Course</th>
                 <th>Branch</th>
+                <th>status</th>
                 <th>Action</th>
             </tr>
             <% var i = 1 %>
@@ -21,6 +22,7 @@
                 <td><%= item.college %></td>
                 <td><%= item.course %></td>
                 <td><%= item.branch %></td>
+                <td><%= item.status %></td>
                 <td>
                     <a href="/viewcourse/<%= item._id %>" class="btn btn-danger btn-sm action-btn"><i class="fa-solid fa-eye"></i></a>
                     <a href="/editcourse/<%= item._id %>" class="btn btn-info btn-sm action-btn"><i class="fa-regular fa-pen-to-square"></i></a>
