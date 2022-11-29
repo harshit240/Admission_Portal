@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 // const port = process.env.PORT || 3200
-const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config({path:'.env'})
 const web = require('./routes/web')
@@ -21,7 +20,6 @@ const flash = require('connect-flash');
 //cookies
 const cookieParser = require('cookie-parser');
 app.use(cookieParser())
-app.use(cors())
 
 //messages
 app.use(session({
