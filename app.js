@@ -21,7 +21,6 @@ const flash = require('connect-flash');
 //cookies
 const cookieParser = require('cookie-parser');
 app.use(cookieParser())
-app.use(cors())
 
 //messages
 app.use(session({
