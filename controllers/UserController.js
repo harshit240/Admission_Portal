@@ -186,7 +186,7 @@ class UserController {
         const token = jwt.sign({ userId: userData._id }, secret,{
           expiresIn:'15m'
         }) 
-        const link = `http://localhost:${process.env.PORT}/reset-password/${userData._id}/${token}`
+        const link = `https://mits-admission-portal.onrender.com/reset-password/${userData._id}/${token}`
         // console.log(link);
         //calling method
         sendResetPasswordMail(userData.name,userData.email,link)
