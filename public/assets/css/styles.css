@@ -179,4 +179,7 @@ label{
 }
 
 /* =================================================================== */
-/* Contact form */
+/* forgot password page form */
+.form-gap {
+  padding-top: 70px;
+}

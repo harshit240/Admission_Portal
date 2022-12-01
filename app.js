@@ -65,5 +65,5 @@ app.use(express.static('public'))
 
 
 app.listen(process.env.PORT, () => {
-    console.log(`Admission_portal app listening on port http://localhost:${process.env.PORT}`)
+    console.log(`Admission_portal app listening on port 🚀 http://localhost:${process.env.PORT}`)
 })

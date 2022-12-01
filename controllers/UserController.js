@@ -2,6 +2,40 @@ const cloudinary = require("cloudinary").v2;
 const UserModel = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nodemailer = require('nodemailer')
+
+const sendResetPasswordMail = async(name,email,link)=>{
+  try {
+    const transporter = nodemailer.createTransport({
+      service:'gmail',
+      auth:{
+        user:"601himanshusahu@gmail.com",
+        pass:'caquyglezfwzuyna'
+      },
+      port:process.env.PORT,
+      host:'smtp.gmail.com'
+    })
+
+    const mailOptions = {
+      from:'601himanshusahu@gmail.com',
+      to:email,
+      subject:'For Reset Password',
+      html:'<p> Hii ' + name + ',Please Copy the link[ '+ link +' ] to Reset your password'
+    }
+
+    transporter.sendMail(mailOptions,function(error,info){
+      if (error) {
+        console.log(error);
+        console.log("error yaha hein");
+      } else {
+        console.log('Mail has been sent :-' + info.response);
+      }
+    })
+
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 cloudinary.config({
   cloud_name: "dqowaxfln",
@@ -73,7 +107,7 @@ class UserController {
               if (user.role == 'user') {
                 //verify token
               const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY,{
-                expiresIn:'20m'
+                expiresIn:'100m'
               });
               // console.log(token);
               res.cookie("token", token);
@@ -114,5 +148,90 @@ class UserController {
         console.log(err);
     }
   }
+
+  static Change_password = async(req,res)=>{
+    try {
+      const{old_password,new_password,confirm_password} = req.body
+      // console.log(req.body);
+      const {_id } = req.data1;
+      // console.log(_id);
+      const user = await UserModel.findOne({id:_id});
+      const isMatched = await bcrypt.compare(old_password,user.password)
+
+      if((new_password === confirm_password) && isMatched){
+        const hashpassword = await bcrypt.hash(new_password, 10);
+        // console.log(hashpassword);
+
+        const result = await UserModel.findByIdAndUpdate(req.data1._id,{password:hashpassword})
+        // console.log("update done");
+        await result.save()
+        res.clearCookie("token");
+        res.redirect('/')
+      }else{
+        req.flash('error','Wrong password')
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  static forgot_password = async(req,res)=>{
+    try {
+      const email = req.body.email
+      const userData = await UserModel.findOne({email:req.body.email});
+
+      if (userData) {
+        const secret = process.env.JWT_SECRET_KEY + userData.password
+        const token = jwt.sign({ userId: userData._id }, secret,{
+          expiresIn:'15m'
+        }) 
+        const link = `http://localhost:${process.env.PORT}/reset-password/${userData._id}/${token}`
+        console.log(link);
+        //calling method
+        sendResetPasswordMail(userData.name,userData.email,link)
+        req.flash('message','Please check your Email for Reset password link')
+        res.redirect('/')
+      } else {
+        req.flash('error','This Email does not exist')
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  static reset_password = async(req,res)=>{
+
+    try {
+      const{id,token} = req.params
+      const{password,confirm_password} = req.body
+      // console.log(req.body);
+  
+      const user = await UserModel.findById(req.params.id)
+      // console.log(user);
+      if(id !== user.id){
+        req.flash('error','Unauthorized reset password')
+        res.render('front/reset_password')
+      }
+      const secret = process.env.JWT_SECRET_KEY + user.password
+      const verfiyToken = jwt.verify(token,secret)
+      
+      if(password === confirm_password){
+        console.log(password + confirm_password);
+        const hashpassword = await bcrypt.hash(password, 10);
+        // console.log(hashpassword);
+        const result = await UserModel.findByIdAndUpdate(req.params.id,{password:hashpassword})
+        await result.save()
+        req.flash('message','Password Changed successfully Do login!')
+        res.redirect("/")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+  
 }
 module.exports = UserController;

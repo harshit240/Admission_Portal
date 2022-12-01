@@ -18,15 +18,19 @@ const Userschema = new mongoose.Schema({
         default:'user'
     },
     image: {
-        public_id: {
-          type: String,
-          required: true,
-        },
-        url: {
-          type: String,
-          required: true,
-        },
+      public_id: {
+        type: String,
+        required: true,
       },
+      url: {
+        type: String,
+        required: true,
+      },
+    },
+    token:{
+        type:String,
+        default:''
+    },
 },{timestamps:true})
 const UserModel = mongoose.model('user',Userschema)
 

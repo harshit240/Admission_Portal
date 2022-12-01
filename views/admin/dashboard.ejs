@@ -6,9 +6,10 @@
                 <th>S.No.</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>College</th>
                 <th>Course</th>
-                <th>Branch</th>
+                <th>Status</th>
+                <th>Comments</th>
+                <th></th>
                 <th>Actions</th>
             </tr>
             <tr>
@@ -25,14 +26,23 @@
                             <%= t.email %>
                         </td>
                         <td>
-                            <%= t.college %>
-                        </td>
-                        <td>
                             <%= t.course %>
                         </td>
-                        <td>
-                            <%= t.branch %>
-                        </td>
+                        <% if(t.status==="Accepted") {%>
+                            <td><button class="btn btn-success"><%= t.status %></button></td>
+                            <%  } else{%>
+                              <td><button class="btn btn-danger"><%= t.status %></button></td>
+                              <% } %>
+                            <!-- Start Form tag from here-->
+                            <form action="/admin/update_status/<%= t._id %>" method="POST">
+
+                            
+                            <td><textarea name="comment" ></textarea></td>
+                            <td>
+                              <button name="status" value="Rejected" class="btn btn-danger">Rejected</button>
+                              <button name="status" value="Accepted" class="btn btn-success">Accepted</button>
+                            </td>
+                          </form>
                         <td>
                             <a href="/admin/blog_view/<%= t._id %>" class="btn btn-info btn-sm action-btn"><i class="fa-solid fa-eye"></i></a>
                             <a href="/admin/blog_edit/<%= t._id %>" class="btn btn-info btn-sm action-btn" ><i class="fa-regular fa-pen-to-square"></i></a>

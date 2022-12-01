@@ -45,6 +45,10 @@ const Courseschema = new mongoose.Schema({
         type:String,
         default:'pending'
     },
+    comment:{
+        type:String,
+        default:'Wait'
+    },
     user:{
         type:mongoose.Schema.ObjectId,
         ref:"user",
