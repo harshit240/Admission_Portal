@@ -26,10 +26,10 @@ const sendResetPasswordMail = async(name,email,link)=>{
     transporter.sendMail(mailOptions,function(error,info){
       if (error) {
         console.log(error);
-        console.log("error yaha hein");
-      } else {
-        console.log('Mail has been sent :-' + info.response);
-      }
+      } 
+      // else {
+      //   console.log('Mail has been sent :-' + info.response);
+      // }
     })
 
   } catch (error) {
@@ -187,7 +187,7 @@ class UserController {
           expiresIn:'15m'
         }) 
         const link = `http://localhost:${process.env.PORT}/reset-password/${userData._id}/${token}`
-        console.log(link);
+        // console.log(link);
         //calling method
         sendResetPasswordMail(userData.name,userData.email,link)
         req.flash('message','Please check your Email for Reset password link')
@@ -232,6 +232,6 @@ class UserController {
     }
 
   }
-  
+
 }
 module.exports = UserController;
