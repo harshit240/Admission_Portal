@@ -14,7 +14,7 @@ app.use(fileUpload({useTempFiles: true}));
 const cloudinary = require('cloudinary');
 
 //connect flash and sessions
-const session = require('connect-session')
+const session = require('express-session')
 const flash = require('connect-flash');
 
 //messages
