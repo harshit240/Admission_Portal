@@ -19,8 +19,11 @@ const sendResetPasswordMail = async(name,email,link)=>{
     const mailOptions = {
       from:'601himanshusahu@gmail.com',
       to:email,
-      subject:'For Reset Password',
-      html:'<p> Hii ' + name + ',Please Copy the link[ '+ link +' ] to Reset your password'
+      subject:'[Admission Portal] Password Reset E-mail',
+      // html:'<p> Hii ' + name + ',<br> Please click on this link '+ link +'  for Reset your password'
+      html:`You're receiving this e-mail because you or someone else has requested a password reset for your user account at . <br><br>
+
+      Click the link below to reset your password: <br>` + link + `<br> <br> If you did not request a password reset you can safely ignore this email.`
     }
 
     transporter.sendMail(mailOptions,function(error,info){
@@ -92,7 +95,7 @@ class UserController {
         return res.redirect("/register");
       }
     }
-  };
+  }
 
   static verify_login = async (req, res) => {
     // console.log(req.body);
@@ -166,9 +169,11 @@ class UserController {
         // console.log("update done");
         await result.save()
         res.clearCookie("token");
+        req.flash('message','Password Changed Succesfully! Do Login!');
         res.redirect('/')
       }else{
         req.flash('error','Wrong password')
+        res.redirect('/dashboard')
       }
     } catch (error) {
       console.log(error);
@@ -188,12 +193,13 @@ class UserController {
         }) 
         const link = `https://mits-admission-portal.onrender.com/reset-password/${userData._id}/${token}`
         // console.log(link);
-        //calling method
+        // calling method
         sendResetPasswordMail(userData.name,userData.email,link)
         req.flash('message','Please check your Email for Reset password link')
-        res.redirect('/')
+        res.redirect('/');
       } else {
         req.flash('error','This Email does not exist')
+        res.redirect('/forgot_password')
       }
 
     } catch (error) {
@@ -219,7 +225,7 @@ class UserController {
       const verfiyToken = jwt.verify(token,secret)
       
       if(password === confirm_password){
-        console.log(password + confirm_password);
+        // console.log(password + confirm_password);
         const hashpassword = await bcrypt.hash(password, 10);
         // console.log(hashpassword);
         const result = await UserModel.findByIdAndUpdate(req.params.id,{password:hashpassword})

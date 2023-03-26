@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="/favicon.ico">
+
+  <link rel="icon" href="/assets/images/logo.png">
 
   <title>Admission Portal</title>
 
@@ -51,12 +52,13 @@
       </button>
 
       <div class="collapse navbar-collapse" id="pn">
-        <ul class="navbar-nav ms-auto text-uppercase">
+        <ul class="navbar-nav ms-auto ">
           <li><a href="/dashboard" class="nav-link">Home</a></li>
-          <li><a href="/about" class="nav-link">About</a></li>
-          <li><a href="/contact" class="nav-link">Contact</a></li>
+          <li><a href="/" class="nav-link">About</a></li>
+          <li><a href="/" class="nav-link">Contact</a></li>
           <li><a href="/logout" class="nav-link">Logout</a></li>
-          <li><a href="#" class="nav-link user" data-bs-toggle="modal" data-bs-target="#add"><%= name %></a></li>
+          <!-- <li><a href="#" class="nav-link user" data-bs-toggle="modal" data-bs-target="#add"><%= name %></a></li> -->
+          <li><a href="#" class="nav-link user" data-bs-toggle="modal" data-bs-target="#add">Change Password</a></li>
         </ul>
         <img src="<%= image.url %>" width="100px" height="100px" alt="...." class="me-3">
       </div>
@@ -77,6 +79,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Old Password</label>
+                        
                         <input type="password" class="form-control" placeholder="Enter Old password"
                             name="old_password" required>
                     </div>

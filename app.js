@@ -21,12 +21,12 @@ const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 app.use(cookieParser())
 
+//for message purposes
 //messages
 app.use(session({
     secret: 'secret',
     cookie: { maxAge: 60000 },
     resave: false,
-
     saveUninitialized: false,
   }));
 //Flash messages
@@ -35,13 +35,14 @@ app.use(flash());
 
 
 //Body parser require
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser')//body parser used to take the data
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended:false }))
+app.use(bodyParser.urlencoded({ extended:false }))//used to get data in url and convert to json format
 // parse application/json
 app.use(express.json())
 
   //Database connection
+const passport = require('passport')
 const connectDB = require('./db/connectdb')
 connectDB()
 
@@ -55,7 +56,7 @@ app.use('/api',api)
 app.set('view engine','ejs')
 
 //static file setup
-app.use(express.static('public'))
+app.use(express.static('public'))//used for static files like css and img
 
 
 
