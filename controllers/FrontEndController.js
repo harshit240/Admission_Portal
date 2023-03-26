@@ -10,11 +10,11 @@ class FrontEndController{
     }
     static about = async(req,res)=>{
         const { name, image, } = req.data1;
-        res.render('front/about',{name: name, image: image})
+        res.render('/',{name: name, image: image})
     }
     static contact = async(req,res)=>{
         const { name, image, } = req.data1;
-        res.render('front/contact',{name: name, image: image})
+        res.render('/',{name: name, image: image})
     }
     
 }
