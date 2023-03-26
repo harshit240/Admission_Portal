@@ -7,41 +7,41 @@ const CheckUserAuth = require("../middleware/auth");
 const AuthRole = require("../middleware/authrole");
 const UserModel = require("../models/User");
 const Passport = require("passport")
-const googleUserModel = require("../models/googleUser");
+// const googleUserModel = require("../models/googleUser");
 const router = express.Router();
 
-const googleStrategy = require("passport-google-oauth20");
+// const googleStrategy = require("passport-google-oauth20");
 
 
-module.exports =(passport)=>{
+// module.exports =(passport)=>{
     
-Passport.use(new googleStrategy({
-    clientID:process.env.clientID,
-    clientSecret:process.env.clientSecret,
-    callbackURL:"http://localhost:3200/auth/google/callback"
-  },(accessToken,refreshToken,profile,done)=>{
-    console.log(profile.emails[0].value);
+// Passport.use(new googleStrategy({
+//     clientID:process.env.clientID,
+//     clientSecret:process.env.clientSecret,
+//     callbackURL:"http://localhost:3200/auth/google/callback"
+//   },(accessToken,refreshToken,profile,done)=>{
+//     console.log(profile.emails[0].value);
   
-    googleUserModel.findOne({googleId: profile.id}).then((existingUser)=>{
-      if(existingUser){
-        //user exists 
-        //update data
-        done(null,existingUser)
-      }
-      else{
-        new googleUserModel({googleId: profile.id}).save().then(user => done(null, user))
-      }
-    })
-  }))
+//     googleUserModel.findOne({googleId: profile.id}).then((existingUser)=>{
+//       if(existingUser){
+//         //user exists 
+//         //update data
+//         done(null,existingUser)
+//       }
+//       else{
+//         new googleUserModel({googleId: profile.id}).save().then(user => done(null, user))
+//       }
+//     })
+//   }))
   
-}
+// }
 
-//Google Oauth routing
-router.get("/auth/google",Passport.authenticate("google",{ failureRedirect:'/' }),(req,res) =>{
-  res.redirect('/dashboard')
-});
+// //Google Oauth routing
+// router.get("/auth/google",Passport.authenticate("google",{ failureRedirect:'/' }),(req,res) =>{
+//   res.redirect('/dashboard')
+// });
 
-router.get("/auth/google/callback",Passport.authenticate("google"))
+// router.get("/auth/google/callback",Passport.authenticate("google"))
 
 
 
