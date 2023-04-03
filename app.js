@@ -14,11 +14,7 @@ app.use(fileUpload({useTempFiles: true}));
 const cloudinary = require('cloudinary');
 
 //connect flash and sessions
-<<<<<<< HEAD
-const session = require('cookie-session')
-=======
 const session = require('express-session')
->>>>>>> a4f07870fdcf4e07c573c0fa15687b4f9791f709
 const flash = require('connect-flash');
 
 //cookies
