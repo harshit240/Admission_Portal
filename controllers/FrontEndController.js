@@ -22,11 +22,12 @@ class FrontEndController {
   };
   static about = async (req, res) => {
     const { name, image } = req.data1;
-    res.render("user/about", { name: name, image: image });
+    res.render("/", { name: name, image: image });
   };
+  
   static contact = async (req, res) => {
     const { name, image } = req.data1;
-    res.render("user/contact", { name: name, image: image });
+    res.render("/", { name: name, image: image });
   };
   static forgot_password = async (req, res) => {
     res.render("front/forgot_password", {message: req.flash("message"),error: req.flash("error")});
@@ -52,4 +53,4 @@ class FrontEndController {
   }
   
 }
-module.exports = FrontEndController;
+module.exports = FrontEndController
