@@ -58,13 +58,6 @@ app.set('view engine','ejs')
 //static file setup
 app.use(express.static('public'))//used for static files like css and img
 
-
-
-
-
-
-
-
 app.listen(process.env.PORT, () => {
     console.log(`Admission_portal app listening on port 🚀 http://localhost:${process.env.PORT}`)
 })
